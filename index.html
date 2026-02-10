@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Для Алёны 💖</title>
+
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;font-family:system-ui}
+body{
+  background: radial-gradient(1200px 600px at 50% -10%, #5b1b7a, #120018);
+  color:#fff;
+}
+section{
+  position:absolute; inset:0;
+  display:none; align-items:center; justify-content:center;
+  text-align:center; padding:20px;
+}
+section.active{display:flex}
+.card{
+  max-width:520px;width:100%;
+  background:rgba(255,255,255,.08);
+  border-radius:28px;padding:26px;
+  backdrop-filter:blur(12px);
+  box-shadow:0 20px 60px rgba(0,0,0,.4);
+}
+.btn{
+  border:none;border-radius:999px;
+  padding:14px 22px;font-size:18px;
+  cursor:pointer;margin:10px;
+}
+.yes{background:#ff4d6d;color:#fff}
+.no{background:#333;color:#fff;position:absolute}
+input{
+  width:100%;padding:14px 16px;
+  border-radius:999px;border:none;
+  font-size:16px;margin-top:12px;
+}
+img.gif{
+  width:200px;max-width:90%;
+  border-radius:20px;
+  margin:10px;
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+/* ❤️ сердечки */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  color:#ff6fae;
+  animation:float 8s linear infinite;
+  font-size:20px;
+  opacity:.8;
+}
+@keyframes float{
+  from{transform:translateY(0);opacity:.9}
+  to{transform:translateY(-110vh);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 АУДИО -->
+<audio id="player" loop></audio>
+
+<script>
+/* 🎶 ТРЕКИ */
+const tracks = {
+  login: "https://raw.githubusercontent.com/cernysevegor1-pixel/valentinka1-/main/PHARAOH_-_Rodnaya_Dusha_79161758.mp3",
+  p1: "https://raw.githubusercontent.com/cernysevegor1-pixel/valentinka1-/main/PHARAOH_-_Mojj_kajjf_58182816.mp3",
+  p2: "https://raw.githubusercontent.com/cernysevegor1-pixel/valentinka1-/main/PHARAOH_-_Lantana_58182825.mp3",
+  p3: "https://raw.githubusercontent.com/cernysevegor1-pixel/valentinka1-/main/PHARAOH_-_Odnim_celym_47828832.mp3",
+  p4: "https://raw.githubusercontent.com/cernysevegor1-pixel/valentinka1-/main/PHARAOH_-_Rodnaya_Dusha_79161758.mp3",
+  p5: "https://raw.githubusercontent.com/cernysevegor1-pixel/valentinka1-/main/PHARAOH_-_Mojj_kajjf_58182816.mp3"
+};
+
+const audio=document.getElementById("player");
+let musicEnabled=true;
+
+function playFor(id){
+  if(tracks[id]){
+    audio.src=tracks[id];
+    audio.play().catch(()=>{});
+  }
+}
+
+function go(id){
+  document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  playFor(id);
+}
+
+/* ❤️ сердечки */
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerText="❤";
+  h.style.left=Math.random()*100+"%";
+  h.style.fontSize=14+Math.random()*20+"px";
+  h.style.animationDuration=6+Math.random()*6+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),12000);
+},500);
+</script>
+
+<!-- 🔒 ВХОД -->
+<section class="active" id="login">
+  <div class="card">
+    <h1>Привет, киса 💕</h1>
+    <p>Подсказка:<br>моя любовь родилась в это время</p>
+    <input id="pass" placeholder="введи пароль">
+    <button class="btn yes" onclick="
+      pass.value==='15042009'
+      ? go('p1')
+      : alert('неа 💔')
+    ">Войти</button>
+  </div>
+</section>
+
+<!-- 1 -->
+<section id="p1">
+  <div class="card">
+    <h1>Алёна, ты меня любишь? 💖</h1>
+    <button class="btn yes" onclick="go('p2')">ДА</button>
+    <button class="btn no" id="noBtn">НЕТ</button>
+  </div>
+</section>
+
+<!-- 2 -->
+<section id="p2">
+  <div class="card">
+    <h1>Это миии 💗</h1>
+    <img class="gif" src="https://raw.githubusercontent.com/cernysevegor1-pixel/123-/main/cat-cats.gif">
+    <img class="gif" src="https://raw.githubusercontent.com/cernysevegor1-pixel/123-/main/i-love-you-cat.gif">
+    <button class="btn yes" onclick="go('p3')">Дальше</button>
+  </div>
+</section>
+
+<!-- 3 РЕБУС -->
+<section id="p3">
+  <div class="card">
+    <h1>Ребус 🧠</h1>
+    <p>❤️ + 🐱 = ?</p>
+    <small>подсказка: как я тебя называю</small>
+    <input id="r1">
+    <button class="btn yes" onclick="
+      r1.value.toLowerCase().includes('люблю')
+      && go('p4')
+    ">Ответить</button>
+  </div>
+</section>
+
+<!-- 4 -->
+<section id="p4">
+  <div class="card">
+    <h1>Ещё один 💭</h1>
+    <p>💌 + 👧 = ?</p>
+    <small>подсказка: чувство</small>
+    <input id="r2">
+    <button class="btn yes" onclick="
+      r2.value.toLowerCase()==='любовь'
+      && go('p5')
+    ">Готово</button>
+  </div>
+</section>
+
+<!-- 5 ФИЛЬМ -->
+<section id="p5">
+  <div class="card">
+    <h1>Фильм 🎬</h1>
+    <p>🚢 + ❤️ + 🌊 = ?</p>
+    <small>подсказка: легендарный</small>
+    <input id="r3">
+    <button class="btn yes" onclick="
+      r3.value.toLowerCase()==='титаник'
+      && go('p6')
+    ">Дальше</button>
+  </div>
+</section>
+
+<script>
+/* ❌ убегающая кнопка */
+const noBtn=document.getElementById("noBtn");
+function moveNo(){
+  noBtn.style.left=Math.random()*70+"%";
+  noBtn.style.top=Math.random()*70+"%";
+}
+noBtn.addEventListener("mouseover",moveNo);
+noBtn.addEventListener("touchstart",moveNo);
+</script>
+<!-- 6 -->
+<section id="p6">
+  <div class="card">
+    <img class="gif" src="https://raw.githubusercontent.com/cernysevegor1-pixel/134/main/besito-catlove.gif">
+    <p>Я очень жду нашей встречи<br>и того дня, когда смогу тебя обнять</p>
+    <button class="btn yes" onclick="go('p7')">Дальше</button>
+  </div>
+</section>
+
+<!-- 7 ОГРОМНЫЙ ТЕКСТ -->
+<section id="p7">
+  <div class="card">
+    <p style="font-size:18px;line-height:1.6">
+      Я люблю тебя так, как не умел любить никогда раньше  
+      Люблю за твой голос  
+      За то как ты смеёшься  
+      За то как ты умеешь быть нежной  
+      И даже когда молчишь — ты всё равно мой дом  
+      Я думаю о тебе каждый день  
+      И каждый раз понимаю что ты — самое настоящее  
+      Самое тёплое  
+      Самое родное что у меня есть  
+    </p>
+    <button class="btn yes" onclick="go('p8')">Дальше</button>
+  </div>
+</section>
+
+<!-- 8 ОГРОМНЫЙ ТЕКСТ 2 -->
+<section id="p8">
+  <div class="card">
+    <p style="font-size:18px;line-height:1.6">
+      Иногда я представляю момент  
+      Когда мы просто рядом  
+      Без слов  
+      Без расстояния  
+      Просто ты и я  
+      И в этом моменте мне не нужно ничего  
+      Потому что весь мой мир — это ты  
+    </p>
+    <button class="btn yes" onclick="go('p9')">Дальше</button>
+  </div>
+</section>
+
+<!-- 9 ТАЙМЕР -->
+<section id="p9">
+  <div class="card">
+    <h1>Мы вместе уже 💞</h1>
+    <p id="timer"></p>
+    <p>И до встречи осталось совсем немного…</p>
+    <button class="btn yes" onclick="go('p10')">Дальше</button>
+  </div>
+</section>
+
+<script>
+function updateTimer(){
+  const start=new Date("2025-03-17");
+  const meet=new Date("2026-07-25");
+  const now=new Date();
+
+  const days=Math.floor((now-start)/(1000*60*60*24));
+  const left=Math.ceil((meet-now)/(1000*60*60*24));
+
+  document.getElementById("timer").innerHTML=
+    days+" дней вместе<br>"+left+" дней до встречи";
+}
+setInterval(updateTimer,1000);
+updateTimer();
+</script>
+
+<!-- 10 -->
+<section id="p10">
+  <div class="card">
+    <img class="gif" src="https://raw.githubusercontent.com/cernysevegor1-pixel/123-/main/i-love-you-cat.gif">
+    <p>Ты мой мир 💖</p>
+    <button class="btn yes" onclick="go('p11')">Дальше</button>
+  </div>
+</section>
+
+<!-- 11 ПАЗЛ -->
+<section id="p11">
+  <div class="card">
+    <h1>Собери пазл 🧩</h1>
+    <p>Подсказка: это мы</p>
+    <div id="puzzle" style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px"></div>
+    <button id="puzzleBtn" class="btn yes" style="display:none" onclick="go('p12')">
+      Дальше
+    </button>
+  </div>
+</section>
+
+<script>
+const puzzle=document.getElementById("puzzle");
+const order=[...Array(16).keys()];
+let current=[...order].sort(()=>Math.random()-0.5);
+
+function draw(){
+  puzzle.innerHTML="";
+  current.forEach((i,idx)=>{
+    const d=document.createElement("div");
+    d.style.backgroundImage="url('https://raw.githubusercontent.com/cernysevegor1-pixel/221/main/photo_5197310109686632229_y.jpg')";
+    d.style.backgroundSize="400% 400%";
+    d.style.backgroundPosition=`${(i%4)*33.3}% ${Math.floor(i/4)*33.3}%`;
+    d.style.aspectRatio="1";
+    d.draggable=true;
+    d.ondragstart=e=>e.dataTransfer.setData("i",idx);
+    d.ondragover=e=>e.preventDefault();
+    d.ondrop=e=>{
+      const from=e.dataTransfer.getData("i");
+      [current[from],current[idx]]=[current[idx],current[from]];
+      draw();
+      check();
+    };
+    puzzle.appendChild(d);
+  });
+}
+
+function check(){
+  if(current.every((v,i)=>v===i)){
+    document.getElementById("puzzleBtn").style.display="inline-block";
+  }
+}
+draw();
+</script>
+
+<!-- 12 -->
+<section id="p12">
+  <div class="card">
+    <img class="gif" src="https://raw.githubusercontent.com/cernysevegor1-pixel/134/main/besito-catlove.gif">
+    <p>Ты справилась 💗</p>
+    <button class="btn yes" onclick="go('p13')">Дальше</button>
+  </div>
+</section>
+
+<!-- 13–18 -->
+<section id="p13"><div class="card"><p>Я горжусь тобой</p><button class="btn yes" onclick="go('p14')">Дальше</button></div></section>
+<section id="p14"><div class="card"><p>Ты невероятная</p><button class="btn yes" onclick="go('p15')">Дальше</button></div></section>
+<section id="p15"><div class="card"><p>Я выбираю тебя каждый день</p><button class="btn yes" onclick="go('p16')">Дальше</button></div></section>
+<section id="p16"><div class="card"><p>Даже когда трудно</p><button class="btn yes" onclick="go('p17')">Дальше</button></div></section>
+<section id="p17"><div class="card"><p>Ты мой дом</p><button class="btn yes" onclick="go('p18')">Дальше</button></div></section>
+<section id="p18"><div class="card"><p>Моё сердце с тобой</p><button class="btn yes" onclick="go('p19')">Дальше</button></div></section>
+
+<!-- 19 СЕКРЕТ -->
+<section id="p19">
+  <div class="card">
+    <h1>Подожди…</h1>
+    <p id="secret" style="display:none">Киса, ты мой мир 💖</p>
+  </div>
+</section>
+
+<script>
+setTimeout(()=>{
+  const s=document.getElementById("secret");
+  if(s) s.style.display="block";
+},10000);
+</script>
+
+<!-- 20 ФИНАЛ -->
+<section id="p20">
+  <div class="card">
+    <h1>Я люблю тебя</h1>
+    <p>До встречи 25 июля 2026</p>
+  </div>
+</section>
+<!-- ❤️ АНИМИРОВАННЫЕ СЕРДЕЧКИ -->
+<style>
+.heart{
+  position:fixed;
+  bottom:-20px;
+  color:#ff4d6d;
+  font-size:18px;
+  animation:float 6s linear infinite;
+  opacity:.7;
+}
+@keyframes float{
+  0%{transform:translateY(0);opacity:0}
+  20%{opacity:.7}
+  100%{transform:translateY(-110vh);opacity:0}
+}
+.fade{
+  animation:fade .6s ease;
+}
+@keyframes fade{
+  from{opacity:0;transform:scale(.96)}
+  to{opacity:1;transform:scale(1)}
+}
+</style>
+
+<script>
+/* 💕 сердца */
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerText="❤";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=14+Math.random()*20+"px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+},300);
+
+/* 🎵 МУЗЫКА ПО СЛАЙДАМ */
+const slideMusic={
+  p1:"https://raw.githubusercontent.com/cernysevegor1-pixel/221/main/PHARAOH_-_Odnim_celym_47828832.mp3",
+  p2:"https://raw.githubusercontent.com/cernysevegor1-pixel/221/main/PHARAOH_-_Lantana_58182825.mp3",
+  p3:"https://raw.githubusercontent.com/cernysevegor1-pixel/221/main/1745568486_ph1r14h-dl61-n1s3l361.mp3",
+  p6:"https://raw.githubusercontent.com/cernysevegor1-pixel/221/main/PHARAOH_-_Mojj_angel_ubil_sebya_ya_ne_uspel_s_nim_poproshhatsya_48531316.mp3",
+  p7:"https://raw.githubusercontent.com/cernysevegor1-pixel/221/main/PHARAOH_-_Lantana_58182825.mp3",
+  p9:"https://raw.githubusercontent.com/cernysevegor1-pixel/221/main/PHARAOH_-_Odnim_celym_47828832.mp3",
+  p11:"https://raw.githubusercontent.com/cernysevegor1-pixel/221/main/1745568486_ph1r14h-dl61-n1s3l361.mp3",
+  p20:"https://raw.githubusercontent.com/cernysevegor1-pixel/221/main/PHARAOH_-_Mojj_angel_ubil_sebya_ya_ne_uspel_s_nim_poproshhatsya_48531316.mp3"
+};
+
+const audio=document.getElementById("player");
+let lastTrack="";
+
+function playFor(id){
+  if(!slideMusic[id]) return;
+  if(lastTrack!==slideMusic[id]){
+    audio.src=slideMusic[id];
+    audio.volume=0;
+    audio.play().catch(()=>{});
+    let v=0;
+    const fade=setInterval(()=>{
+      v+=0.05;
+      audio.volume=Math.min(v,1);
+      if(v>=1) clearInterval(fade);
+    },100);
+    lastTrack=slideMusic[id];
+  }
+}
+
+/* ✨ плавный переход */
+const oldGo=go;
+go=function(id){
+  document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+  const el=document.getElementById(id);
+  el.classList.add("active","fade");
+  playFor(id);
+}
+</script>
+
+<!-- 💖 ПЕРСОНАЛЬНЫЙ ФИНАЛ -->
+<section id="final-love">
+  <div class="card">
+    <h1>Алёна</h1>
+    <p style="font-size:18px;line-height:1.7">
+      Если ты дошла до этого момента  
+      значит ты прочитала всё сердцем  
+      Я сделал этот сайт не ради эффекта  
+      а ради тебя  
+      Ради того чтобы ты знала  
+      что ты — мой выбор  
+      моя любовь  
+      мой дом  
+      и моё будущее  
+      Киса  
+      ты мой мир 💖
+    </p>
+  </div>
+</section>
+
